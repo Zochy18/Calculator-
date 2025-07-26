@@ -1,0 +1,113 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simple Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" class="display" disabled />
+    <div class="buttons">
+      <button>C</button>
+      <button>/</button>
+      <button>*</button>
+      <button>-</button>
+
+      <button>7</button>
+      <button>8</button>
+      <button>9</button>
+      <button>+</button>
+
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+      <button>.</button>
+
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>=</button>
+
+      <button class="zero">0</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html><style>/* style.css */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f3f4f6;
+  font-family: Arial, sans-serif;
+}
+
+.calculator {
+  width: 300px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.display {
+  width: 100%;
+  height: 60px;
+  font-size: 2em;
+  text-align: right;
+  padding: 10px;
+  border: none;
+  background: #eef2f7;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+button {
+  padding: 20px;
+  font-size: 1.2em;
+  border: 1px solid #ddd;
+  background: #f9fafb;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background: #e5e7eb;
+}
+
+.zero {
+  grid-column: span 4;
+  background: #d1d5db;
+}</style><script>// script.js
+const display = document.querySelector('.display');
+const buttons = document.querySelectorAll('button');
+
+let currentInput = '';
+
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    const value = button.textContent;
+
+    if (value === 'C') {
+      currentInput = '';
+      display.value = '';
+    } else if (value === '=') {
+      try {
+        currentInput = eval(currentInput).toString();
+        display.value = currentInput;
+      } catch (e) {
+        display.value = 'Error';
+      }
+    } else {
+      currentInput += value;
+      display.value = currentInput;
+    }
+  });
+});</script>
